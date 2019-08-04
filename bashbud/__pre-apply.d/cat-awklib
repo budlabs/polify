@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+projectdir="$1"
+
+if [[ -d $projectdir/awklib ]]; then
+  # update ass list
+  {
+    echo '#!/usr/bin/env bash'
+    echo
+    echo 'awklib() {'
+    echo 'target="${1:-main}"'
+    echo 'if [[ -n ${___dir:-} ]]; then #bashbud'
+    echo '  if [[ $target = main ]]; then #bashbud'
+    echo '    find "${___dir}/awklib" -maxdepth 1 -type f -exec cat "{}" \; #bashbud'
+   
+
+    for d in "$projectdir/awklib/"* ;do
+      [[ -d "$d" ]] || continue
+      dirname="${d##*/}"
+      printf '  elif [[ $target = %s ]]; then #bashbud\n' "$dirname"
+      printf '    find "${___dir}/awklib/%s" -maxdepth 1 -type f -exec cat "{}" \; #bashbud\n' "$dirname"
+    done 
+
+    echo '  fi #bashbud'
+    echo 'else #bashbud'
+
+
+    echo
+    echo
+
+    echo '  if [[ $target = main ]]; then'
+    echo "cat << 'EOB'"
+    find "$projectdir/awklib" -maxdepth 1 -type f -exec cat "{}" \;
+    echo 'EOB' 
+
+
+    for d in "$projectdir/awklib/"* ;do
+      [[ -d "$d" ]] || continue
+      echo
+      echo
+      dirname="${d##*/}"
+      printf '  elif [[ $target = %s ]]; then\n' "$dirname"
+      echo "cat << 'EOB'"
+      find "$d" -maxdepth 1 -type f -exec cat "{}" \;
+      echo 'EOB' 
+
+    done 
+
+    echo '  fi'
+
+
+    echo 'fi #bashbud'
+    echo '}'
+  } > "$projectdir/lib/awklib.sh" 
+   
+fi
