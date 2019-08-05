@@ -64,13 +64,16 @@ EXAMPLES
 %%examples%%
 %%fi%%
 %%if -d releasenotes%%
-## updates
+
+UPDATES
+-------
 
 %%cat -t -n 3 releasenotes/*%%
 %%fi%%
 %%if readme_issues%%
 
-## known issues
+KNOWN ISSUES
+------------
 
 %%readme_issues%%
 %%fi%%
@@ -80,7 +83,9 @@ EXAMPLES
 %%fi%%
 
 %%if license%%
-## license
+
+LICENSE
+-------
 
 **%%name%%** is licensed with the **%%license ^^%% license**
 %%fi%%

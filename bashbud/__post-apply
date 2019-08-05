@@ -5,5 +5,6 @@
 
 projectdir=$1
 rm -f "$projectdir"/___{version,envs,help,getopt}
+mv -f "$projectdir"/program.sh "${projectdir##*/}"
 
 

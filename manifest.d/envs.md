@@ -1,3 +1,3 @@
-# environ-BASHBUD_DIR-description
+# environ-POLIFY_DIR-description
 
-bashbud config dir location.
+Path to a directory where polify keeps module state. Defaults to `/tmp/polify`.

@@ -3,28 +3,27 @@
 ___printversion(){
   
 cat << 'EOB' >&2
-polify - version: 2019.08
-updated: 2019-08-04 by budRich
+polify - version: 2019.08.05.5
+updated: 2019-08-05 by budRich
 EOB
 }
 
 
 # environment variables
-: "${POLIFY_DEFAULT_MODULE:=polify}"
+: "${POLIFY_DIR:=/tmp/polify}"
 
 
 ___printhelp(){
   
 cat << 'EOB' >&2
-polify - The most convenient way to update hookmodules on a polybar
+polify - Update polybar hookmodules in a safe and smooth way
 
 
 SYNOPSIS
 --------
-polify [OPTIONS] [MESSAGE]
-polify [--module|-o TARGET-MODULE] [--pid|-p PID] [--foreground|-f COLOR] [--background|-b COLOR] [--leftclick|-l COMMAND] [--rightclick|-r COMMAND] [--middleclick|-m COMMAND] [--prefix|-e STRING [ [--foreground-prefix|-F COLOR]  [--background-prefix|-B COLOR] [--leftclick-prefix|-L COMMAND] [--rightclick-prefix|-R COMMAND] [--middleclick-prefix|-M COMMAND] ] [--expire-time|-t SECONDS] [--msg|-s MESSAGE] [MESSAGE]
-polify [--module|-o TARGET-MODULE] [--pid|-p PID] --clear|-x
-polify [--module|-o TARGET-MODULE] [--pid|-p PID] --update|-U
+polify --module|-o TARGET-MODULE [OPTIONS] [MESSAGE]
+polify --module|-o TARGET-MODULE [--pid|-p PID] [--foreground|-f COLOR] [--background|-b COLOR] [--leftclick|-l COMMAND] [--rightclick|-r COMMAND] [--middleclick|-m COMMAND] [--scrollup|-u COMMAND] [--scrolldown|-d COMMAND] [--prefix|-e STRING [ [--foreground-prefix|-F COLOR]  [--background-prefix|-B COLOR] [--leftclick-prefix|-L COMMAND] [--rightclick-prefix|-R COMMAND] [--middleclick-prefix|-M COMMAND] [--scrollup-prefix|-U COMMAND] [--scrolldown-prefix|-D COMMAND] ] [--expire-time|-t SECONDS] [--msg|-s MESSAGE] [MESSAGE]
+polify --module|-o TARGET-MODULE [--pid|-p PID] --clear|-x
 polify --help|-h
 polify --version|-v
 
@@ -65,6 +64,16 @@ COMMAND will get executed when MESSAGE is
 middle-clicked
 
 
+--scrollup|-u COMMAND  
+COMMAND will get executed when MESSAGE is
+scrolled up.
+
+
+--scrolldown|-d COMMAND  
+COMMAND will get executed when MESSAGE is
+scrolled down.
+
+
 --prefix|-e STRING  
 PREFIX text
 
@@ -94,6 +103,16 @@ COMMAND will get executed when PREFIX is
 middle-clicked
 
 
+--scrollup-prefix|-U COMMAND  
+COMMAND will get executed when PREFIX is scrolled
+up.
+
+
+--scrolldown-prefix|-D COMMAND  
+COMMAND will get executed when PREFIX is scrolled
+down.
+
+
 --expire-time|-t SECONDS  
 If set module will get cleared after SECONDS
 
@@ -106,10 +125,8 @@ module
 
 
 --clear|-x  
-Clears the module (both message and prefix) and
-the file.
+Clears the module.
 
---update|-U  
 
 --help|-h  
 Show help and exit.
@@ -128,8 +145,8 @@ done
 
 declare -A __o
 eval set -- "$(getopt --name "polify" \
-  --options "o:p:f:b:l:r:m:e:F:B:L:R:M:t:s:xUhv" \
-  --longoptions "module:,pid:,foreground:,background:,leftclick:,rightclick:,middleclick:,prefix:,foreground-prefix:,background-prefix:,leftclick-prefix:,rightclick-prefix:,middleclick-prefix:,expire-time:,msg:,clear,update,help,version," \
+  --options "o:p:f:b:l:r:m:u:d:e:F:B:L:R:M:U:D:t:s:xhv" \
+  --longoptions "module:,pid:,foreground:,background:,leftclick:,rightclick:,middleclick:,scrollup:,scrolldown:,prefix:,foreground-prefix:,background-prefix:,leftclick-prefix:,rightclick-prefix:,middleclick-prefix:,scrollup-prefix:,scrolldown-prefix:,expire-time:,msg:,clear,help,version," \
   -- "$@"
 )"
 
@@ -142,16 +159,19 @@ while true; do
     --leftclick  | -l ) __o[leftclick]="${2:-}" ; shift ;;
     --rightclick | -r ) __o[rightclick]="${2:-}" ; shift ;;
     --middleclick | -m ) __o[middleclick]="${2:-}" ; shift ;;
+    --scrollup   | -u ) __o[scrollup]="${2:-}" ; shift ;;
+    --scrolldown | -d ) __o[scrolldown]="${2:-}" ; shift ;;
     --prefix     | -e ) __o[prefix]="${2:-}" ; shift ;;
     --foreground-prefix | -F ) __o[foreground-prefix]="${2:-}" ; shift ;;
     --background-prefix | -B ) __o[background-prefix]="${2:-}" ; shift ;;
     --leftclick-prefix | -L ) __o[leftclick-prefix]="${2:-}" ; shift ;;
     --rightclick-prefix | -R ) __o[rightclick-prefix]="${2:-}" ; shift ;;
     --middleclick-prefix | -M ) __o[middleclick-prefix]="${2:-}" ; shift ;;
+    --scrollup-prefix | -U ) __o[scrollup-prefix]="${2:-}" ; shift ;;
+    --scrolldown-prefix | -D ) __o[scrolldown-prefix]="${2:-}" ; shift ;;
     --expire-time | -t ) __o[expire-time]="${2:-}" ; shift ;;
     --msg        | -s ) __o[msg]="${2:-}" ; shift ;;
     --clear      | -x ) __o[clear]=1 ;; 
-    --update     | -U ) __o[update]=1 ;; 
     --help       | -h ) __o[help]=1 ;; 
     --version    | -v ) __o[version]=1 ;; 
     -- ) shift ; break ;;
