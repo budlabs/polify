@@ -1,3 +1,3 @@
 # environ-POLIFY_DIR-description
 
-Path to a directory where polify keeps module state. Defaults to `/tmp/polify`.
+Path to a directory where polify keeps module state. 

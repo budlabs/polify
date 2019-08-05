@@ -228,7 +228,7 @@ ENVIRONMENT
 
 `POLIFY_DIR`  
 Path to a directory where polify keeps module
-state. Defaults to `/tmp/polify`.
+state.
 defaults to: /tmp/polify
 
 DEPENDENCIES

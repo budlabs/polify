@@ -5,6 +5,8 @@ See the live action raw uncut demonstration video on **youtube**:
 
 # readme_install
 
+If you use **Arch Linux** you can get **polify** from [AUR](https://aur.archlinux.org/packages/polify/).  
+
 **polify** have no dependencies and all you need is the `polify` script in your PATH. Use the Makefile to do a systemwide installation of both the script and the manpage.  
 
 (*configure the installation destination in the Makefile, if needed*)

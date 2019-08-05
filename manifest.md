@@ -2,7 +2,7 @@
 description: >
   Update polybar hookmodules in a safe and smooth way
 updated:       2019-08-05
-version:       2019.08.05.7
+version:       2019.08.05.8
 author:        budRich
 repo:          https://github.com/budlabs/polify
 created:       2019-03-18
