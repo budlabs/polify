@@ -12,7 +12,7 @@ systemwide installation of both the script and the manpage.
 (*configure the installation destination in the Makefile,
 if needed*)
 
-``` text
+```
 $ git clone https://github.com/budlabs/polify.git
 $ cd polify
 # make install
@@ -143,7 +143,7 @@ If you are using multiple polybars you can use the `--pid PID` option to specify
 OPTIONS
 -------
 
-```text
+```
 polify --module|-o TARGET-MODULE [OPTIONS] [MESSAGE]
 polify --module|-o TARGET-MODULE [--pid|-p PID] [--foreground|-f COLOR] [--background|-b COLOR] [--leftclick|-l COMMAND] [--rightclick|-r COMMAND] [--middleclick|-m COMMAND] [--scrollup|-u COMMAND] [--scrolldown|-d COMMAND] [--prefix|-e STRING [ [--foreground-prefix|-F COLOR]  [--background-prefix|-B COLOR] [--leftclick-prefix|-L COMMAND] [--rightclick-prefix|-R COMMAND] [--middleclick-prefix|-M COMMAND] [--scrollup-prefix|-U COMMAND] [--scrolldown-prefix|-D COMMAND] ] [--expire-time|-t SECONDS] [--msg|-s MESSAGE] [MESSAGE]
 polify --module|-o TARGET-MODULE [--pid|-p PID] --clear|-x
@@ -223,7 +223,7 @@ Show version and exit.
 UPDATES
 -------
 
-# 2019.08.05.0
+#### 2019.08.05.0
 
 Initial release.
 

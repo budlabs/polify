@@ -9,7 +9,7 @@ See the live action raw uncut demonstration video on **youtube**:
 
 (*configure the installation destination in the Makefile, if needed*)
 
-``` text
+```
 $ git clone https://github.com/budlabs/polify.git
 $ cd polify
 # make install
