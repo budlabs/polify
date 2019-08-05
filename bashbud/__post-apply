@@ -7,4 +7,8 @@ projectdir=$1
 rm -f "$projectdir"/___{version,envs,help,getopt}
 mv -f "$projectdir"/program.sh "${projectdir##*/}"
 
-
+cp -f "$projectdir/${projectdir##*/}" "$projectdir"/next
+cp -f "$projectdir/${projectdir##*/}.1" "$projectdir"/next
+cp -f "$projectdir"/README.md "$projectdir"/next
+cp -f "$projectdir"/Makefile "$projectdir"/next
+cp -f "$projectdir"/LICENSE "$projectdir"/next
