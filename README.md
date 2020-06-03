@@ -108,12 +108,25 @@ Since only the last line of the file is the one that will
 be visible in the bar, it is possible to write and read text
 to the file and use them to f.i. store the state of a
 module. This is conveniently done by using the `--msg
-MESSAGE` option.
+MESSAGE` option.  
+
+polify is shipped with the script **polifypop**, which can
+be used to execute commands on the `--msg`line. It will only
+execute a command if it is prefixed with the word
+**POLIPOP**. And the first argument to **polifypop** needs
+to be the name of the module, it is cool to bind polifypop
+to a hotkey...
 
 ```
 $ polify --module polifyModule1 --msg "mode1" --foreground '#FF0000' this is mode one
 $ cat /tmp/polify/polifyModule1 | head -1
 mode1
+```
+
+
+```
+$ polify --module polifyModule1 --msg "POLIPOP notify-send 'hello pop'" hello bar
+$ polifypop polifyModule1
 ```
 
 
@@ -227,6 +240,11 @@ UPDATES
 -------
 
 #### 2019.08.05.0
+
+Added polifypop.
+
+#### 2019.08.05.0
+
 
 Initial release.
 
