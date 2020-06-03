@@ -12,3 +12,4 @@ cp -f "$projectdir/${projectdir##*/}.1" "$projectdir"/next
 cp -f "$projectdir"/README.md "$projectdir"/next
 cp -f "$projectdir"/Makefile "$projectdir"/next
 cp -f "$projectdir"/LICENSE "$projectdir"/next
+cp -f "$projectdir"/polifypop.sh "$projectdir"/next/polifypop

@@ -13,6 +13,7 @@ install:
 	test -d $(INSTMAN) || mkdir -p $(INSTMAN)
 
 	install -m 0755 $(SCRIPT)  $(INSTBIN)
+	install -m 0755 polifypop  $(INSTBIN)
 	install -m 0644 $(MANPAGE) $(INSTMAN)
 .PHONY: install
 

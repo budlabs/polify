@@ -1,4 +1,5 @@
-.TH POLIFY 1 2019\-08\-05 Linux "User Manuals"
+.nh
+.TH POLIFY 1 2020\-06\-03 Linux "User Manuals"
 .SH NAME
 .PP
 \fB\fCpolify\fR \- Update polybar hookmodules in a safe
@@ -133,12 +134,31 @@ conveniently done by using the \fB\fC\-\-msg MESSAGE\fR
 option.
 
 .PP
+polify is shipped with the script \fBpolifypop\fP,
+which can be used to execute commands on the
+\fB\fC\-\-msg\fRline. It will only execute a command if it
+is prefixed with the word \fBPOLIPOP\fP\&. And the
+first argument to \fBpolifypop\fP needs to be the
+name of the module, it is cool to bind polifypop
+to a hotkey...
+
+.PP
 .RS
 
 .nf
 $ polify \-\-module polifyModule1 \-\-msg "mode1" \-\-foreground '#FF0000' this is mode one
 $ cat /tmp/polify/polifyModule1 | head \-1
 mode1
+
+.fi
+.RE
+
+.PP
+.RS
+
+.nf
+$ polify \-\-module polifyModule1 \-\-msg "POLIPOP notify\-send 'hello pop'" hello bar
+$ polifypop polifyModule1
 
 .fi
 .RE
@@ -317,7 +337,7 @@ state. defaults to: /tmp/polify
 \fB\fCbash\fR \fB\fCpolybar\fR \fB\fCgetopt\fR
 
 .PP
-budRich 
+budRich https://github.com/budlabs/polify
 \[la]https://github.com/budlabs/polify\[ra]
 
 .SH SEE ALSO
